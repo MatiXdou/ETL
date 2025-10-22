@@ -7,12 +7,12 @@
   DTS:CreatorName="MATIX\sodio"
   DTS:DTSID="{8E797754-72DF-4A16-ACCC-EBD66E219EA7}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.521.0"
+  DTS:LastModifiedProductVersion="16.0.5685.2"
   DTS:LocaleID="13322"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="4"
-  DTS:VersionGUID="{80DB8046-7C47-4762-BE27-99E066E6ECF6}">
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{B9774FD9-ECF5-44CD-A78C-09B71589CCFB}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -61,13 +61,13 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="138,42"
+          Size="137.6,41.6"
           Id="Package\aaaasdASD"
           TopLeft="187,121" />
         <NodeLayout
-          Size="134,42"
+          Size="134.4,41.6"
           Id="Package\HolaAAAaA"
-          TopLeft="220.833321267533,239.199998336633" />
+          TopLeft="203.333322223691,221.866665123833" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
