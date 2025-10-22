@@ -11,43 +11,2234 @@
   DTS:LocaleID="13322"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{B9774FD9-ECF5-44CD-A78C-09B71589CCFB}">
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{AE0130A0-A318-4E9A-B718-C00F43CC2931}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\aaaasdASD"
+      DTS:refId="Package\Dimension Almacen"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
       DTS:DTSID="{5F4302E4-2701-4D67-8ECC-D4DFA85B18C5}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="aaaasdASD"
+      DTS:ObjectName="Dimension Almacen"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
         <pipeline
-          version="1" />
+          version="1">
+          <components>
+            <component
+              refId="Package\Dimension Almacen\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="División condicional;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+              description="Enruta filas de datos a diferentes salidas según el contenido de los datos. Se usan condiciones (expresiones de SSIS) para especificar las filas que se van a enrutar. Por ejemplo, se usa para separar los registros que deben limpiarse de los registros listos para ser cargados o para enrutar solamente un subconjunto de registros."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Dimension Almacen\Conditional Split.Inputs[Entrada de división condicional]"
+                  description="Entrada en la transformación División condicional"
+                  name="Entrada de división condicional">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Conditional Split.Inputs[Entrada de división condicional].Columns[AlmacenID (1)]"
+                      cachedDataType="i4"
+                      cachedName="AlmacenID (1)"
+                      lineageId="Package\Dimension Almacen\Merge Join.Outputs[Salida de combinación de mezcla].Columns[AlmacenID (1)]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dimension Almacen\Conditional Split.Outputs[Condicion_id]"
+                  description="Salida 1 de la transformación División condicional"
+                  errorOrTruncationOperation="Cálculo"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Condicion_id"
+                  synchronousInputId="Package\Dimension Almacen\Conditional Split.Inputs[Entrada de división condicional]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la expresión. Esta versión de expresión usa identificadores de linaje en lugar de nombres de columna."
+                      name="Expression">[ISNULL](#{Package\Dimension Almacen\Merge Join.Outputs[Salida de combinación de mezcla].Columns[AlmacenID (1)]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la versión descriptiva de la expresión. Esta versión de expresión usa nombres de columna."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL([AlmacenID (1)])</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la posición de la condición en la lista de condiciones que evalúa la transformación. El orden de evaluación es del menor al mayor valor."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Dimension Almacen\Conditional Split.Outputs[Salida predeterminada de división condicional]"
+                  description="Salida predeterminada de la transformación División condicional"
+                  exclusionGroup="1"
+                  name="Salida predeterminada de división condicional"
+                  synchronousInputId="Package\Dimension Almacen\Conditional Split.Inputs[Entrada de división condicional]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Dimension Almacen\Conditional Split.Outputs[Salida de error de división condicional]"
+                  description="Salida de error de la transformación División condicional"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de división condicional"
+                  synchronousInputId="Package\Dimension Almacen\Conditional Split.Inputs[Entrada de división condicional]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Conditional Split.Outputs[Salida de error de división condicional].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Almacen\Conditional Split.Outputs[Salida de error de división condicional].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Conditional Split.Outputs[Salida de error de división condicional].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Almacen\Conditional Split.Outputs[Salida de error de división condicional].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dimension Almacen\Destino Almacen"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino de OLE DB"
+              name="Destino Almacen"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[DimAlmacen]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dimension Almacen\Destino Almacen.Connections[OleDbConnection]"
+                  connectionManagerID="{2918866D-7F3D-42B8-84D3-A97DC60E2512}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[MATIX.DW_BikeZ]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Dimension Almacen\Destino Almacen.Inputs[Entrada de destino de OLE DB]"
+                  errorOrTruncationOperation="Insertar"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Destino Almacen.Inputs[Entrada de destino de OLE DB].Columns[AlmacenID]"
+                      cachedDataType="i4"
+                      cachedName="AlmacenID"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\Dimension Almacen\Destino Almacen.Inputs[Entrada de destino de OLE DB].ExternalColumns[AlmacenID]"
+                      lineageId="Package\Dimension Almacen\Merge Join.Outputs[Salida de combinación de mezcla].Columns[AlmacenID]" />
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Destino Almacen.Inputs[Entrada de destino de OLE DB].Columns[Almacen]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Almacen"
+                      externalMetadataColumnId="Package\Dimension Almacen\Destino Almacen.Inputs[Entrada de destino de OLE DB].ExternalColumns[NombreAlmacen]"
+                      lineageId="Package\Dimension Almacen\Merge Join.Outputs[Salida de combinación de mezcla].Columns[Almacen]" />
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Destino Almacen.Inputs[Entrada de destino de OLE DB].Columns[Territorio]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Territorio"
+                      externalMetadataColumnId="Package\Dimension Almacen\Destino Almacen.Inputs[Entrada de destino de OLE DB].ExternalColumns[NombreTerritorio]"
+                      lineageId="Package\Dimension Almacen\Merge Join.Outputs[Salida de combinación de mezcla].Columns[Territorio]" />
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Destino Almacen.Inputs[Entrada de destino de OLE DB].Columns[Grupo]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Grupo"
+                      externalMetadataColumnId="Package\Dimension Almacen\Destino Almacen.Inputs[Entrada de destino de OLE DB].ExternalColumns[GrupoTerritorio]"
+                      lineageId="Package\Dimension Almacen\Merge Join.Outputs[Salida de combinación de mezcla].Columns[Grupo]" />
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Destino Almacen.Inputs[Entrada de destino de OLE DB].Columns[Pais]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Pais"
+                      externalMetadataColumnId="Package\Dimension Almacen\Destino Almacen.Inputs[Entrada de destino de OLE DB].ExternalColumns[NombrePais]"
+                      lineageId="Package\Dimension Almacen\Merge Join.Outputs[Salida de combinación de mezcla].Columns[Pais]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dimension Almacen\Destino Almacen.Inputs[Entrada de destino de OLE DB].ExternalColumns[AlmacenID]"
+                      dataType="i4"
+                      name="AlmacenID" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Almacen\Destino Almacen.Inputs[Entrada de destino de OLE DB].ExternalColumns[NombreAlmacen]"
+                      dataType="wstr"
+                      length="50"
+                      name="NombreAlmacen" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Almacen\Destino Almacen.Inputs[Entrada de destino de OLE DB].ExternalColumns[NombreTerritorio]"
+                      dataType="wstr"
+                      length="50"
+                      name="NombreTerritorio" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Almacen\Destino Almacen.Inputs[Entrada de destino de OLE DB].ExternalColumns[GrupoTerritorio]"
+                      dataType="wstr"
+                      length="50"
+                      name="GrupoTerritorio" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Almacen\Destino Almacen.Inputs[Entrada de destino de OLE DB].ExternalColumns[NombrePais]"
+                      dataType="wstr"
+                      length="50"
+                      name="NombrePais" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dimension Almacen\Destino Almacen.Outputs[Salida de error de destino de OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de OLE DB"
+                  synchronousInputId="Package\Dimension Almacen\Destino Almacen.Inputs[Entrada de destino de OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Destino Almacen.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Almacen\Destino Almacen.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Destino Almacen.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Almacen\Destino Almacen.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dimension Almacen\Merge Join"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Combinación de mezcla;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Combina dos flujos de datos ordenados en uno solo mediante la combinación FULL, LEFT o INNER. Se recomienda esta transformación cuando se pueden ordenar los flujos de datos en sus orígenes."
+              name="Merge Join"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el tipo de combinación que se debe realizar."
+                  name="JoinType"
+                  typeConverter="JoinType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número de columnas de la clave de ordenación."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores NULL se tratan como valores iguales."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indica la cantidad máxima solicitada de búferes por entrada antes del bloqueo."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Dimension Almacen\Merge Join.Inputs[Entrada izquierda de combinación de mezcla]"
+                  hasSideEffects="true"
+                  name="Entrada izquierda de combinación de mezcla">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Merge Join.Inputs[Entrada izquierda de combinación de mezcla].Columns[AlmacenID]"
+                      cachedDataType="i4"
+                      cachedName="AlmacenID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Dimension Almacen\Sort.Outputs[Salida de ordenación].Columns[AlmacenID]" />
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Merge Join.Inputs[Entrada izquierda de combinación de mezcla].Columns[Almacen]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Almacen"
+                      lineageId="Package\Dimension Almacen\Sort.Outputs[Salida de ordenación].Columns[Almacen]" />
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Merge Join.Inputs[Entrada izquierda de combinación de mezcla].Columns[Territorio]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Territorio"
+                      lineageId="Package\Dimension Almacen\Sort.Outputs[Salida de ordenación].Columns[Territorio]" />
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Merge Join.Inputs[Entrada izquierda de combinación de mezcla].Columns[Grupo]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Grupo"
+                      lineageId="Package\Dimension Almacen\Sort.Outputs[Salida de ordenación].Columns[Grupo]" />
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Merge Join.Inputs[Entrada izquierda de combinación de mezcla].Columns[Pais]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Pais"
+                      lineageId="Package\Dimension Almacen\Sort.Outputs[Salida de ordenación].Columns[Pais]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Dimension Almacen\Merge Join.Inputs[Entrada derecha de combinación de mezcla]"
+                  hasSideEffects="true"
+                  name="Entrada derecha de combinación de mezcla">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Merge Join.Inputs[Entrada derecha de combinación de mezcla].Columns[AlmacenID]"
+                      cachedDataType="i4"
+                      cachedName="AlmacenID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Dimension Almacen\Sort 1.Outputs[Salida de ordenación].Columns[AlmacenID]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dimension Almacen\Merge Join.Outputs[Salida de combinación de mezcla]"
+                  isSorted="true"
+                  name="Salida de combinación de mezcla">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Merge Join.Outputs[Salida de combinación de mezcla].Columns[AlmacenID]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Almacen\Merge Join.Outputs[Salida de combinación de mezcla].Columns[AlmacenID]"
+                      name="AlmacenID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Dimension Almacen\Merge Join.Inputs[Entrada izquierda de combinación de mezcla].Columns[AlmacenID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Merge Join.Outputs[Salida de combinación de mezcla].Columns[AlmacenID (1)]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Almacen\Merge Join.Outputs[Salida de combinación de mezcla].Columns[AlmacenID (1)]"
+                      name="AlmacenID (1)">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Dimension Almacen\Merge Join.Inputs[Entrada derecha de combinación de mezcla].Columns[AlmacenID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Merge Join.Outputs[Salida de combinación de mezcla].Columns[Almacen]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Merge Join.Outputs[Salida de combinación de mezcla].Columns[Almacen]"
+                      name="Almacen">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Dimension Almacen\Merge Join.Inputs[Entrada izquierda de combinación de mezcla].Columns[Almacen]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Merge Join.Outputs[Salida de combinación de mezcla].Columns[Territorio]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Merge Join.Outputs[Salida de combinación de mezcla].Columns[Territorio]"
+                      name="Territorio">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Dimension Almacen\Merge Join.Inputs[Entrada izquierda de combinación de mezcla].Columns[Territorio]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Merge Join.Outputs[Salida de combinación de mezcla].Columns[Grupo]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Merge Join.Outputs[Salida de combinación de mezcla].Columns[Grupo]"
+                      name="Grupo">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Dimension Almacen\Merge Join.Inputs[Entrada izquierda de combinación de mezcla].Columns[Grupo]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Merge Join.Outputs[Salida de combinación de mezcla].Columns[Pais]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Merge Join.Outputs[Salida de combinación de mezcla].Columns[Pais]"
+                      name="Pais">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Dimension Almacen\Merge Join.Inputs[Entrada izquierda de combinación de mezcla].Columns[Pais]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dimension Almacen\Origen Almacen"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+              description="Origen de OLE DB"
+              name="Origen Almacen"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT a.AlmacenID, a.Almacen, t.Territorio, t.Grupo, p.Pais
+FROM Almacenes a
+JOIN Territorios t
+ON a.TerritorioID = t.TerritorioID
+JOIN Paises p
+ON t.PaisID = p.PaisID</property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dimension Almacen\Origen Almacen.Connections[OleDbConnection]"
+                  connectionManagerID="{A6524820-C242-43C5-9035-CF1B93077355}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[MATIX.BikeZ]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].Columns[AlmacenID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].ExternalColumns[AlmacenID]"
+                      lineageId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].Columns[AlmacenID]"
+                      name="AlmacenID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].Columns[Almacen]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].ExternalColumns[Almacen]"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].Columns[Almacen]"
+                      name="Almacen"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].Columns[Territorio]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].ExternalColumns[Territorio]"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].Columns[Territorio]"
+                      name="Territorio"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].Columns[Grupo]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].ExternalColumns[Grupo]"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].Columns[Grupo]"
+                      name="Grupo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].Columns[Pais]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].ExternalColumns[Pais]"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].Columns[Pais]"
+                      name="Pais"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].ExternalColumns[AlmacenID]"
+                      dataType="i4"
+                      name="AlmacenID" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].ExternalColumns[Almacen]"
+                      dataType="wstr"
+                      length="50"
+                      name="Almacen" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].ExternalColumns[Territorio]"
+                      dataType="wstr"
+                      length="50"
+                      name="Territorio" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].ExternalColumns[Grupo]"
+                      dataType="wstr"
+                      length="50"
+                      name="Grupo" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].ExternalColumns[Pais]"
+                      dataType="wstr"
+                      length="50"
+                      name="Pais" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de error de origen de OLE DB]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de error de origen de OLE DB].Columns[AlmacenID]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de error de origen de OLE DB].Columns[AlmacenID]"
+                      name="AlmacenID" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de error de origen de OLE DB].Columns[Almacen]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de error de origen de OLE DB].Columns[Almacen]"
+                      name="Almacen" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de error de origen de OLE DB].Columns[Territorio]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de error de origen de OLE DB].Columns[Territorio]"
+                      name="Territorio" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de error de origen de OLE DB].Columns[Grupo]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de error de origen de OLE DB].Columns[Grupo]"
+                      name="Grupo" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de error de origen de OLE DB].Columns[Pais]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de error de origen de OLE DB].Columns[Pais]"
+                      name="Pais" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dimension Almacen\Origen DW Almacen"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+              description="Origen de OLE DB"
+              name="Origen DW Almacen"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[DimAlmacen]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dimension Almacen\Origen DW Almacen.Connections[OleDbConnection]"
+                  connectionManagerID="{2918866D-7F3D-42B8-84D3-A97DC60E2512}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[MATIX.DW_BikeZ]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].Columns[AlmacenID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].ExternalColumns[AlmacenID]"
+                      lineageId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].Columns[AlmacenID]"
+                      name="AlmacenID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].Columns[NombreAlmacen]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].ExternalColumns[NombreAlmacen]"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].Columns[NombreAlmacen]"
+                      name="NombreAlmacen"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].Columns[NombreTerritorio]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].ExternalColumns[NombreTerritorio]"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].Columns[NombreTerritorio]"
+                      name="NombreTerritorio"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].Columns[GrupoTerritorio]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].ExternalColumns[GrupoTerritorio]"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].Columns[GrupoTerritorio]"
+                      name="GrupoTerritorio"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].Columns[NombrePais]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].ExternalColumns[NombrePais]"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].Columns[NombrePais]"
+                      name="NombrePais"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].ExternalColumns[AlmacenID]"
+                      dataType="i4"
+                      name="AlmacenID" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].ExternalColumns[NombreAlmacen]"
+                      dataType="wstr"
+                      length="50"
+                      name="NombreAlmacen" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].ExternalColumns[NombreTerritorio]"
+                      dataType="wstr"
+                      length="50"
+                      name="NombreTerritorio" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].ExternalColumns[GrupoTerritorio]"
+                      dataType="wstr"
+                      length="50"
+                      name="GrupoTerritorio" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].ExternalColumns[NombrePais]"
+                      dataType="wstr"
+                      length="50"
+                      name="NombrePais" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de error de origen de OLE DB]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de error de origen de OLE DB].Columns[AlmacenID]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de error de origen de OLE DB].Columns[AlmacenID]"
+                      name="AlmacenID" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de error de origen de OLE DB].Columns[NombreAlmacen]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de error de origen de OLE DB].Columns[NombreAlmacen]"
+                      name="NombreAlmacen" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de error de origen de OLE DB].Columns[NombreTerritorio]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de error de origen de OLE DB].Columns[NombreTerritorio]"
+                      name="NombreTerritorio" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de error de origen de OLE DB].Columns[GrupoTerritorio]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de error de origen de OLE DB].Columns[GrupoTerritorio]"
+                      name="GrupoTerritorio" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de error de origen de OLE DB].Columns[NombrePais]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de error de origen de OLE DB].Columns[NombrePais]"
+                      name="NombrePais" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dimension Almacen\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Ordenar;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Ordena los datos de entrada de manera ascendente o descendente cuando no es posible ordenarlos en su origen. Por ejemplo, se ordenan los datos de ventas por 'id. de cliente' antes de que se escriban en un archivo plano y se entreguen a otro departamento. Nota: no se recomienda realizar esta transformación para grandes flujos de datos."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si la transformación Ordenar quita filas con valores de ordenación duplicados."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de subprocesos que se deben usar para la ordenación."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Dimension Almacen\Sort.Inputs[Entrada de ordenación]"
+                  name="Entrada de ordenación">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Sort.Inputs[Entrada de ordenación].Columns[AlmacenID]"
+                      cachedDataType="i4"
+                      cachedName="AlmacenID"
+                      lineageId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].Columns[AlmacenID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Sort.Inputs[Entrada de ordenación].Columns[Almacen]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Almacen"
+                      lineageId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].Columns[Almacen]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Sort.Inputs[Entrada de ordenación].Columns[Territorio]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Territorio"
+                      lineageId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].Columns[Territorio]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Sort.Inputs[Entrada de ordenación].Columns[Grupo]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Grupo"
+                      lineageId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].Columns[Grupo]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Sort.Inputs[Entrada de ordenación].Columns[Pais]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Pais"
+                      lineageId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].Columns[Pais]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dimension Almacen\Sort.Outputs[Salida de ordenación]"
+                  isSorted="true"
+                  name="Salida de ordenación">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Sort.Outputs[Salida de ordenación].Columns[AlmacenID]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Almacen\Sort.Outputs[Salida de ordenación].Columns[AlmacenID]"
+                      name="AlmacenID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].Columns[AlmacenID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Sort.Outputs[Salida de ordenación].Columns[Almacen]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Sort.Outputs[Salida de ordenación].Columns[Almacen]"
+                      name="Almacen">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].Columns[Almacen]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Sort.Outputs[Salida de ordenación].Columns[Territorio]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Sort.Outputs[Salida de ordenación].Columns[Territorio]"
+                      name="Territorio">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].Columns[Territorio]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Sort.Outputs[Salida de ordenación].Columns[Grupo]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Sort.Outputs[Salida de ordenación].Columns[Grupo]"
+                      name="Grupo">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].Columns[Grupo]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Sort.Outputs[Salida de ordenación].Columns[Pais]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Sort.Outputs[Salida de ordenación].Columns[Pais]"
+                      name="Pais">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB].Columns[Pais]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dimension Almacen\Sort 1"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Ordenar;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Ordena los datos de entrada de manera ascendente o descendente cuando no es posible ordenarlos en su origen. Por ejemplo, se ordenan los datos de ventas por 'id. de cliente' antes de que se escriban en un archivo plano y se entreguen a otro departamento. Nota: no se recomienda realizar esta transformación para grandes flujos de datos."
+              name="Sort 1"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si la transformación Ordenar quita filas con valores de ordenación duplicados."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de subprocesos que se deben usar para la ordenación."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Dimension Almacen\Sort 1.Inputs[Entrada de ordenación]"
+                  name="Entrada de ordenación">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Sort 1.Inputs[Entrada de ordenación].Columns[AlmacenID]"
+                      cachedDataType="i4"
+                      cachedName="AlmacenID"
+                      lineageId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].Columns[AlmacenID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Sort 1.Inputs[Entrada de ordenación].Columns[NombreAlmacen]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="NombreAlmacen"
+                      lineageId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].Columns[NombreAlmacen]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Sort 1.Inputs[Entrada de ordenación].Columns[NombreTerritorio]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="NombreTerritorio"
+                      lineageId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].Columns[NombreTerritorio]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Sort 1.Inputs[Entrada de ordenación].Columns[GrupoTerritorio]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="GrupoTerritorio"
+                      lineageId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].Columns[GrupoTerritorio]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Dimension Almacen\Sort 1.Inputs[Entrada de ordenación].Columns[NombrePais]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="NombrePais"
+                      lineageId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].Columns[NombrePais]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dimension Almacen\Sort 1.Outputs[Salida de ordenación]"
+                  isSorted="true"
+                  name="Salida de ordenación">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Sort 1.Outputs[Salida de ordenación].Columns[AlmacenID]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Almacen\Sort 1.Outputs[Salida de ordenación].Columns[AlmacenID]"
+                      name="AlmacenID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].Columns[AlmacenID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Sort 1.Outputs[Salida de ordenación].Columns[NombreAlmacen]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Sort 1.Outputs[Salida de ordenación].Columns[NombreAlmacen]"
+                      name="NombreAlmacen">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].Columns[NombreAlmacen]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Sort 1.Outputs[Salida de ordenación].Columns[NombreTerritorio]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Sort 1.Outputs[Salida de ordenación].Columns[NombreTerritorio]"
+                      name="NombreTerritorio">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].Columns[NombreTerritorio]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Sort 1.Outputs[Salida de ordenación].Columns[GrupoTerritorio]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Sort 1.Outputs[Salida de ordenación].Columns[GrupoTerritorio]"
+                      name="GrupoTerritorio">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].Columns[GrupoTerritorio]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dimension Almacen\Sort 1.Outputs[Salida de ordenación].Columns[NombrePais]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Almacen\Sort 1.Outputs[Salida de ordenación].Columns[NombrePais]"
+                      name="NombrePais">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB].Columns[NombrePais]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Dimension Almacen.Paths[Condicion_id]"
+              endId="Package\Dimension Almacen\Destino Almacen.Inputs[Entrada de destino de OLE DB]"
+              name="Condicion_id"
+              startId="Package\Dimension Almacen\Conditional Split.Outputs[Condicion_id]" />
+            <path
+              refId="Package\Dimension Almacen.Paths[Salida de combinación de mezcla]"
+              endId="Package\Dimension Almacen\Conditional Split.Inputs[Entrada de división condicional]"
+              name="Salida de combinación de mezcla"
+              startId="Package\Dimension Almacen\Merge Join.Outputs[Salida de combinación de mezcla]" />
+            <path
+              refId="Package\Dimension Almacen.Paths[Salida de ordenación]"
+              endId="Package\Dimension Almacen\Merge Join.Inputs[Entrada izquierda de combinación de mezcla]"
+              name="Salida de ordenación"
+              startId="Package\Dimension Almacen\Sort.Outputs[Salida de ordenación]" />
+            <path
+              refId="Package\Dimension Almacen.Paths[Salida de ordenación1]"
+              endId="Package\Dimension Almacen\Merge Join.Inputs[Entrada derecha de combinación de mezcla]"
+              name="Salida de ordenación"
+              startId="Package\Dimension Almacen\Sort 1.Outputs[Salida de ordenación]" />
+            <path
+              refId="Package\Dimension Almacen.Paths[Salida de origen de OLE DB]"
+              endId="Package\Dimension Almacen\Sort.Inputs[Entrada de ordenación]"
+              name="Salida de origen de OLE DB"
+              startId="Package\Dimension Almacen\Origen Almacen.Outputs[Salida de origen de OLE DB]" />
+            <path
+              refId="Package\Dimension Almacen.Paths[Salida de origen de OLE DB1]"
+              endId="Package\Dimension Almacen\Sort 1.Inputs[Entrada de ordenación]"
+              name="Salida de origen de OLE DB"
+              startId="Package\Dimension Almacen\Origen DW Almacen.Outputs[Salida de origen de OLE DB]" />
+          </paths>
+        </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\HolaAAAaA"
+      DTS:refId="Package\Dimension Cliente"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Tarea Flujo de datos"
       DTS:DTSID="{380A54D5-5BE3-43A4-9F5A-93AEA6143FC1}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="HolaAAAaA"
+      DTS:ObjectName="Dimension Cliente"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
         <pipeline
-          version="1" />
+          version="1">
+          <components>
+            <component
+              refId="Package\Dimension Cliente\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="División condicional;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+              description="Enruta filas de datos a diferentes salidas según el contenido de los datos. Se usan condiciones (expresiones de SSIS) para especificar las filas que se van a enrutar. Por ejemplo, se usa para separar los registros que deben limpiarse de los registros listos para ser cargados o para enrutar solamente un subconjunto de registros."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Dimension Cliente\Conditional Split.Inputs[Entrada de división condicional]"
+                  description="Entrada en la transformación División condicional"
+                  name="Entrada de división condicional">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dimension Cliente\Conditional Split.Inputs[Entrada de división condicional].Columns[ClienteID (1)]"
+                      cachedDataType="i4"
+                      cachedName="ClienteID (1)"
+                      lineageId="Package\Dimension Cliente\Merge Join.Outputs[Salida de combinación de mezcla].Columns[ClienteID (1)]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dimension Cliente\Conditional Split.Outputs[Condicion_id]"
+                  description="Salida 1 de la transformación División condicional"
+                  errorOrTruncationOperation="Cálculo"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Condicion_id"
+                  synchronousInputId="Package\Dimension Cliente\Conditional Split.Inputs[Entrada de división condicional]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la expresión. Esta versión de expresión usa identificadores de linaje en lugar de nombres de columna."
+                      name="Expression">[ISNULL](#{Package\Dimension Cliente\Merge Join.Outputs[Salida de combinación de mezcla].Columns[ClienteID (1)]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la versión descriptiva de la expresión. Esta versión de expresión usa nombres de columna."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL([ClienteID (1)])</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la posición de la condición en la lista de condiciones que evalúa la transformación. El orden de evaluación es del menor al mayor valor."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Dimension Cliente\Conditional Split.Outputs[Salida predeterminada de división condicional]"
+                  description="Salida predeterminada de la transformación División condicional"
+                  exclusionGroup="1"
+                  name="Salida predeterminada de división condicional"
+                  synchronousInputId="Package\Dimension Cliente\Conditional Split.Inputs[Entrada de división condicional]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Dimension Cliente\Conditional Split.Outputs[Salida de error de división condicional]"
+                  description="Salida de error de la transformación División condicional"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de división condicional"
+                  synchronousInputId="Package\Dimension Cliente\Conditional Split.Inputs[Entrada de división condicional]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Conditional Split.Outputs[Salida de error de división condicional].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Cliente\Conditional Split.Outputs[Salida de error de división condicional].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Conditional Split.Outputs[Salida de error de división condicional].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Cliente\Conditional Split.Outputs[Salida de error de división condicional].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dimension Cliente\Destino de OLE DB"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino de OLE DB"
+              name="Destino de OLE DB"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[DimCliente]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dimension Cliente\Destino de OLE DB.Connections[OleDbConnection]"
+                  connectionManagerID="{2918866D-7F3D-42B8-84D3-A97DC60E2512}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[MATIX.DW_BikeZ]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Dimension Cliente\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+                  errorOrTruncationOperation="Insertar"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dimension Cliente\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[ClienteID]"
+                      cachedDataType="i4"
+                      cachedName="ClienteID"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\Dimension Cliente\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[ClienteID]"
+                      lineageId="Package\Dimension Cliente\Merge Join.Outputs[Salida de combinación de mezcla].Columns[ClienteID]" />
+                    <inputColumn
+                      refId="Package\Dimension Cliente\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Nombre]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Nombre"
+                      externalMetadataColumnId="Package\Dimension Cliente\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Nombre]"
+                      lineageId="Package\Dimension Cliente\Merge Join.Outputs[Salida de combinación de mezcla].Columns[Nombre]" />
+                    <inputColumn
+                      refId="Package\Dimension Cliente\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Apellido]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Apellido"
+                      externalMetadataColumnId="Package\Dimension Cliente\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Apellido]"
+                      lineageId="Package\Dimension Cliente\Merge Join.Outputs[Salida de combinación de mezcla].Columns[Apellido]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dimension Cliente\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[ClienteID]"
+                      dataType="i4"
+                      name="ClienteID" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Cliente\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Nombre]"
+                      dataType="wstr"
+                      length="50"
+                      name="Nombre" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Cliente\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Apellido]"
+                      dataType="wstr"
+                      length="50"
+                      name="Apellido" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dimension Cliente\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de OLE DB"
+                  synchronousInputId="Package\Dimension Cliente\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Cliente\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Cliente\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dimension Cliente\Merge Join"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Combinación de mezcla;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Combina dos flujos de datos ordenados en uno solo mediante la combinación FULL, LEFT o INNER. Se recomienda esta transformación cuando se pueden ordenar los flujos de datos en sus orígenes."
+              name="Merge Join"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el tipo de combinación que se debe realizar."
+                  name="JoinType"
+                  typeConverter="JoinType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número de columnas de la clave de ordenación."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores NULL se tratan como valores iguales."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indica la cantidad máxima solicitada de búferes por entrada antes del bloqueo."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Dimension Cliente\Merge Join.Inputs[Entrada izquierda de combinación de mezcla]"
+                  hasSideEffects="true"
+                  name="Entrada izquierda de combinación de mezcla">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dimension Cliente\Merge Join.Inputs[Entrada izquierda de combinación de mezcla].Columns[ClienteID]"
+                      cachedDataType="i4"
+                      cachedName="ClienteID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Dimension Cliente\Sort.Outputs[Salida de ordenación].Columns[ClienteID]" />
+                    <inputColumn
+                      refId="Package\Dimension Cliente\Merge Join.Inputs[Entrada izquierda de combinación de mezcla].Columns[Nombre]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Nombre"
+                      lineageId="Package\Dimension Cliente\Sort.Outputs[Salida de ordenación].Columns[Nombre]" />
+                    <inputColumn
+                      refId="Package\Dimension Cliente\Merge Join.Inputs[Entrada izquierda de combinación de mezcla].Columns[Apellido]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Apellido"
+                      lineageId="Package\Dimension Cliente\Sort.Outputs[Salida de ordenación].Columns[Apellido]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Dimension Cliente\Merge Join.Inputs[Entrada derecha de combinación de mezcla]"
+                  hasSideEffects="true"
+                  name="Entrada derecha de combinación de mezcla">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dimension Cliente\Merge Join.Inputs[Entrada derecha de combinación de mezcla].Columns[ClienteID]"
+                      cachedDataType="i4"
+                      cachedName="ClienteID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Dimension Cliente\Sort 1.Outputs[Salida de ordenación].Columns[ClienteID]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dimension Cliente\Merge Join.Outputs[Salida de combinación de mezcla]"
+                  isSorted="true"
+                  name="Salida de combinación de mezcla">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Merge Join.Outputs[Salida de combinación de mezcla].Columns[ClienteID]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Cliente\Merge Join.Outputs[Salida de combinación de mezcla].Columns[ClienteID]"
+                      name="ClienteID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Dimension Cliente\Merge Join.Inputs[Entrada izquierda de combinación de mezcla].Columns[ClienteID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Merge Join.Outputs[Salida de combinación de mezcla].Columns[ClienteID (1)]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Cliente\Merge Join.Outputs[Salida de combinación de mezcla].Columns[ClienteID (1)]"
+                      name="ClienteID (1)">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Dimension Cliente\Merge Join.Inputs[Entrada derecha de combinación de mezcla].Columns[ClienteID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Merge Join.Outputs[Salida de combinación de mezcla].Columns[Nombre]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Cliente\Merge Join.Outputs[Salida de combinación de mezcla].Columns[Nombre]"
+                      name="Nombre">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Dimension Cliente\Merge Join.Inputs[Entrada izquierda de combinación de mezcla].Columns[Nombre]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Merge Join.Outputs[Salida de combinación de mezcla].Columns[Apellido]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Cliente\Merge Join.Outputs[Salida de combinación de mezcla].Columns[Apellido]"
+                      name="Apellido">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\Dimension Cliente\Merge Join.Inputs[Entrada izquierda de combinación de mezcla].Columns[Apellido]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dimension Cliente\Origen Cliente"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+              description="Origen de OLE DB"
+              name="Origen Cliente"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT ClienteID, Nombre, Apellido FROM Clientes</property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dimension Cliente\Origen Cliente.Connections[OleDbConnection]"
+                  connectionManagerID="{A6524820-C242-43C5-9035-CF1B93077355}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[MATIX.BikeZ]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de origen de OLE DB].Columns[ClienteID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de origen de OLE DB].ExternalColumns[ClienteID]"
+                      lineageId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de origen de OLE DB].Columns[ClienteID]"
+                      name="ClienteID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de origen de OLE DB].Columns[Nombre]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de origen de OLE DB].ExternalColumns[Nombre]"
+                      length="50"
+                      lineageId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de origen de OLE DB].Columns[Nombre]"
+                      name="Nombre"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de origen de OLE DB].Columns[Apellido]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de origen de OLE DB].ExternalColumns[Apellido]"
+                      length="50"
+                      lineageId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de origen de OLE DB].Columns[Apellido]"
+                      name="Apellido"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de origen de OLE DB].ExternalColumns[ClienteID]"
+                      dataType="i4"
+                      name="ClienteID" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de origen de OLE DB].ExternalColumns[Nombre]"
+                      dataType="wstr"
+                      length="50"
+                      name="Nombre" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de origen de OLE DB].ExternalColumns[Apellido]"
+                      dataType="wstr"
+                      length="50"
+                      name="Apellido" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de error de origen de OLE DB]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de error de origen de OLE DB].Columns[ClienteID]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de error de origen de OLE DB].Columns[ClienteID]"
+                      name="ClienteID" />
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de error de origen de OLE DB].Columns[Nombre]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de error de origen de OLE DB].Columns[Nombre]"
+                      name="Nombre" />
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de error de origen de OLE DB].Columns[Apellido]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de error de origen de OLE DB].Columns[Apellido]"
+                      name="Apellido" />
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dimension Cliente\Origen DW Cliente"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+              description="Origen de OLE DB"
+              name="Origen DW Cliente"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[DimCliente]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dimension Cliente\Origen DW Cliente.Connections[OleDbConnection]"
+                  connectionManagerID="{2918866D-7F3D-42B8-84D3-A97DC60E2512}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[MATIX.DW_BikeZ]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de origen de OLE DB].Columns[ClienteID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de origen de OLE DB].ExternalColumns[ClienteID]"
+                      lineageId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de origen de OLE DB].Columns[ClienteID]"
+                      name="ClienteID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de origen de OLE DB].Columns[Nombre]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de origen de OLE DB].ExternalColumns[Nombre]"
+                      length="50"
+                      lineageId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de origen de OLE DB].Columns[Nombre]"
+                      name="Nombre"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de origen de OLE DB].Columns[Apellido]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de origen de OLE DB].ExternalColumns[Apellido]"
+                      length="50"
+                      lineageId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de origen de OLE DB].Columns[Apellido]"
+                      name="Apellido"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de origen de OLE DB].ExternalColumns[ClienteID]"
+                      dataType="i4"
+                      name="ClienteID" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de origen de OLE DB].ExternalColumns[Nombre]"
+                      dataType="wstr"
+                      length="50"
+                      name="Nombre" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de origen de OLE DB].ExternalColumns[Apellido]"
+                      dataType="wstr"
+                      length="50"
+                      name="Apellido" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de error de origen de OLE DB]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de error de origen de OLE DB].Columns[ClienteID]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de error de origen de OLE DB].Columns[ClienteID]"
+                      name="ClienteID" />
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de error de origen de OLE DB].Columns[Nombre]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de error de origen de OLE DB].Columns[Nombre]"
+                      name="Nombre" />
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de error de origen de OLE DB].Columns[Apellido]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de error de origen de OLE DB].Columns[Apellido]"
+                      name="Apellido" />
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dimension Cliente\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Ordenar;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Ordena los datos de entrada de manera ascendente o descendente cuando no es posible ordenarlos en su origen. Por ejemplo, se ordenan los datos de ventas por 'id. de cliente' antes de que se escriban en un archivo plano y se entreguen a otro departamento. Nota: no se recomienda realizar esta transformación para grandes flujos de datos."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si la transformación Ordenar quita filas con valores de ordenación duplicados."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de subprocesos que se deben usar para la ordenación."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Dimension Cliente\Sort.Inputs[Entrada de ordenación]"
+                  name="Entrada de ordenación">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dimension Cliente\Sort.Inputs[Entrada de ordenación].Columns[ClienteID]"
+                      cachedDataType="i4"
+                      cachedName="ClienteID"
+                      lineageId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de origen de OLE DB].Columns[ClienteID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Dimension Cliente\Sort.Inputs[Entrada de ordenación].Columns[Nombre]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Nombre"
+                      lineageId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de origen de OLE DB].Columns[Nombre]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Dimension Cliente\Sort.Inputs[Entrada de ordenación].Columns[Apellido]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Apellido"
+                      lineageId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de origen de OLE DB].Columns[Apellido]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dimension Cliente\Sort.Outputs[Salida de ordenación]"
+                  isSorted="true"
+                  name="Salida de ordenación">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Sort.Outputs[Salida de ordenación].Columns[ClienteID]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Cliente\Sort.Outputs[Salida de ordenación].Columns[ClienteID]"
+                      name="ClienteID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Dimension Cliente\Origen Cliente.Outputs[Salida de origen de OLE DB].Columns[ClienteID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Sort.Outputs[Salida de ordenación].Columns[Nombre]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Cliente\Sort.Outputs[Salida de ordenación].Columns[Nombre]"
+                      name="Nombre">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Dimension Cliente\Origen Cliente.Outputs[Salida de origen de OLE DB].Columns[Nombre]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Sort.Outputs[Salida de ordenación].Columns[Apellido]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Cliente\Sort.Outputs[Salida de ordenación].Columns[Apellido]"
+                      name="Apellido">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Dimension Cliente\Origen Cliente.Outputs[Salida de origen de OLE DB].Columns[Apellido]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dimension Cliente\Sort 1"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Ordenar;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Ordena los datos de entrada de manera ascendente o descendente cuando no es posible ordenarlos en su origen. Por ejemplo, se ordenan los datos de ventas por 'id. de cliente' antes de que se escriban en un archivo plano y se entreguen a otro departamento. Nota: no se recomienda realizar esta transformación para grandes flujos de datos."
+              name="Sort 1"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si la transformación Ordenar quita filas con valores de ordenación duplicados."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de subprocesos que se deben usar para la ordenación."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Dimension Cliente\Sort 1.Inputs[Entrada de ordenación]"
+                  name="Entrada de ordenación">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dimension Cliente\Sort 1.Inputs[Entrada de ordenación].Columns[ClienteID]"
+                      cachedDataType="i4"
+                      cachedName="ClienteID"
+                      lineageId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de origen de OLE DB].Columns[ClienteID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Dimension Cliente\Sort 1.Inputs[Entrada de ordenación].Columns[Nombre]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Nombre"
+                      lineageId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de origen de OLE DB].Columns[Nombre]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Dimension Cliente\Sort 1.Inputs[Entrada de ordenación].Columns[Apellido]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Apellido"
+                      lineageId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de origen de OLE DB].Columns[Apellido]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dimension Cliente\Sort 1.Outputs[Salida de ordenación]"
+                  isSorted="true"
+                  name="Salida de ordenación">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Sort 1.Outputs[Salida de ordenación].Columns[ClienteID]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Cliente\Sort 1.Outputs[Salida de ordenación].Columns[ClienteID]"
+                      name="ClienteID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de origen de OLE DB].Columns[ClienteID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Sort 1.Outputs[Salida de ordenación].Columns[Nombre]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Cliente\Sort 1.Outputs[Salida de ordenación].Columns[Nombre]"
+                      name="Nombre">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de origen de OLE DB].Columns[Nombre]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Dimension Cliente\Sort 1.Outputs[Salida de ordenación].Columns[Apellido]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Dimension Cliente\Sort 1.Outputs[Salida de ordenación].Columns[Apellido]"
+                      name="Apellido">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de origen de OLE DB].Columns[Apellido]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Dimension Cliente.Paths[Condicion_id]"
+              endId="Package\Dimension Cliente\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+              name="Condicion_id"
+              startId="Package\Dimension Cliente\Conditional Split.Outputs[Condicion_id]" />
+            <path
+              refId="Package\Dimension Cliente.Paths[Salida de combinación de mezcla]"
+              endId="Package\Dimension Cliente\Conditional Split.Inputs[Entrada de división condicional]"
+              name="Salida de combinación de mezcla"
+              startId="Package\Dimension Cliente\Merge Join.Outputs[Salida de combinación de mezcla]" />
+            <path
+              refId="Package\Dimension Cliente.Paths[Salida de ordenación]"
+              endId="Package\Dimension Cliente\Merge Join.Inputs[Entrada izquierda de combinación de mezcla]"
+              name="Salida de ordenación"
+              startId="Package\Dimension Cliente\Sort.Outputs[Salida de ordenación]" />
+            <path
+              refId="Package\Dimension Cliente.Paths[Salida de ordenación1]"
+              endId="Package\Dimension Cliente\Merge Join.Inputs[Entrada derecha de combinación de mezcla]"
+              name="Salida de ordenación"
+              startId="Package\Dimension Cliente\Sort 1.Outputs[Salida de ordenación]" />
+            <path
+              refId="Package\Dimension Cliente.Paths[Salida de origen de OLE DB]"
+              endId="Package\Dimension Cliente\Sort.Inputs[Entrada de ordenación]"
+              name="Salida de origen de OLE DB"
+              startId="Package\Dimension Cliente\Origen Cliente.Outputs[Salida de origen de OLE DB]" />
+            <path
+              refId="Package\Dimension Cliente.Paths[Salida de origen de OLE DB1]"
+              endId="Package\Dimension Cliente\Sort 1.Inputs[Entrada de ordenación]"
+              name="Salida de origen de OLE DB"
+              startId="Package\Dimension Cliente\Origen DW Cliente.Outputs[Salida de origen de OLE DB]" />
+          </paths>
+        </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{0914BAFF-4231-4A4E-8375-BAC037E0E53E}"
+      DTS:From="Package\Dimension Almacen"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Dimension Cliente" />
+  </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -59,17 +2250,507 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="137.6,41.6"
-          Id="Package\aaaasdASD"
+          Size="171.2,41.6"
+          Id="Package\Dimension Almacen"
           TopLeft="187,121" />
         <NodeLayout
-          Size="134.4,41.6"
-          Id="Package\HolaAAAaA"
-          TopLeft="203.333322223691,221.866665123833" />
+          Size="163.2,41.6"
+          Id="Package\Dimension Cliente"
+          TopLeft="319.999982515972,220.422220689433" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="272.6,162.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="128.999982515972,57.822220689433"
+              Start="0,0"
+              End="128.999982515972,50.322220689433">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.9111103447165" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.9111103447165"
+                    Point2="0,28.9111103447165"
+                    Point3="4,28.9111103447165" />
+                  <mssgle:LineSegment
+                    End="124.999982515972,28.9111103447165" />
+                  <mssgle:CubicBezierSegment
+                    Point1="124.999982515972,28.9111103447165"
+                    Point2="128.999982515972,28.9111103447165"
+                    Point3="128.999982515972,32.9111103447165" />
+                  <mssgle:LineSegment
+                    End="128.999982515972,50.322220689433" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
+  <TaskHost
+    design-time-name="Package\Dimension Almacen">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\Dimension Almacen\Origen Almacen"
+          TopLeft="128.333326321509,64.1333328873582" />
+        <NodeLayout
+          Size="172.8,41.6"
+          Id="Package\Dimension Almacen\Origen DW Almacen"
+          TopLeft="417.499977188807,65.8666662086381" />
+        <NodeLayout
+          Size="97.6,41.6"
+          Id="Package\Dimension Almacen\Sort"
+          TopLeft="148.333325228758,161.199998879035" />
+        <NodeLayout
+          Size="106.4,41.6"
+          Id="Package\Dimension Almacen\Sort 1"
+          TopLeft="447.499975549679,154.266665593916" />
+        <EdgeLayout
+          Id="Package\Dimension Almacen.Paths[Salida de origen de OLE DB]"
+          TopLeft="200.933325775134,105.733332887358">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55.4666659916772"
+              Start="0,0"
+              End="0,47.9666659916772">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.9666659916772" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Dimension Almacen.Paths[Salida de origen de OLE DB1]"
+          TopLeft="502.299976369243,107.466666208638">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.7999993852774"
+              Start="0,0"
+              End="0,39.2999993852774">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.2999993852774" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Dimension Almacen\Merge Join"
+          TopLeft="278.846138610673,251.06666492078" />
+        <EdgeLayout
+          Id="Package\Dimension Almacen.Paths[Salida de ordenación]"
+          TopLeft="197.133325228758,202.799998879035">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="126.246146715248,48.2666660417451"
+              Start="0,0"
+              End="126.246146715248,40.7666660417451">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.6068288979123" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.6068288979123"
+                    Point2="0,28.6068288979123"
+                    Point3="4,28.6068288979123" />
+                  <mssgle:LineSegment
+                    End="122.246146715248,28.6068288979123" />
+                  <mssgle:CubicBezierSegment
+                    Point1="122.246146715248,28.6068288979123"
+                    Point2="126.246146715248,28.6068288979123"
+                    Point3="126.246146715248,32.6068288979123" />
+                  <mssgle:LineSegment
+                    End="126.246146715248,40.7666660417451" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Dimension Almacen.Paths[Salida de ordenación1]"
+          TopLeft="500.699975549679,195.866665593916">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-136.78717027234,55.1999993268649"
+              Start="0,0"
+              End="-136.78717027234,47.6999993268649">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.7160971620199" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.7160971620199"
+                    Point2="0,32.7160971620199"
+                    Point3="-4,32.7160971620199" />
+                  <mssgle:LineSegment
+                    End="-132.78717027234,32.7160971620199" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-132.78717027234,32.7160971620199"
+                    Point2="-136.78717027234,32.7160971620199"
+                    Point3="-136.78717027234,36.7160971620199" />
+                  <mssgle:LineSegment
+                    End="-136.78717027234,47.6999993268649" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Dimension Almacen\Conditional Split"
+          TopLeft="267.424227812827,340.36363399679" />
+        <EdgeLayout
+          Id="Package\Dimension Almacen.Paths[Salida de combinación de mezcla]"
+          TopLeft="343.93518321175,292.66666492078">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.6969690760098"
+              Start="0,0"
+              End="0,40.1969690760098">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.1969690760098" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="156.8,41.6"
+          Id="Package\Dimension Almacen\Destino Almacen"
+          TopLeft="268.939379245194,420.727269801588" />
+        <EdgeLayout
+          Id="Package\Dimension Almacen.Paths[Condicion_id]"
+          TopLeft="345.78180352901,381.96363399679">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.7636358047976"
+              Start="0,0"
+              End="0,31.2636358047976">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.2636358047976" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-28.5205078125,10.1005679023988,57.041015625,11.0625"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Dimension Cliente">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="144.8,41.6"
+          Id="Package\Dimension Cliente\Origen Cliente"
+          TopLeft="140.999997898936,96.9999985545873" />
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\Dimension Cliente\Origen DW Cliente"
+          TopLeft="445.999993354082,95.9999985694885" />
+        <NodeLayout
+          Size="97.6,41.6"
+          Id="Package\Dimension Cliente\Sort"
+          TopLeft="164.285711837666,186.428568650569" />
+        <NodeLayout
+          Size="106.4,41.6"
+          Id="Package\Dimension Cliente\Sort 1"
+          TopLeft="472.142850107381,188.571425761495" />
+        <EdgeLayout
+          Id="Package\Dimension Cliente.Paths[Salida de origen de OLE DB]"
+          TopLeft="213.242854868301,138.599998554587">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.8285700959819"
+              Start="0,0"
+              End="0,40.3285700959819">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.3285700959819" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Dimension Cliente.Paths[Salida de origen de OLE DB1]"
+          TopLeft="526.871421730731,137.599998569489">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50.9714271920067"
+              Start="0,0"
+              End="0,43.4714271920067">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.4714271920067" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\Dimension Cliente\Merge Join"
+          TopLeft="288.333329036832,273.333329260349" />
+        <EdgeLayout
+          Id="Package\Dimension Cliente.Paths[Salida de ordenación]"
+          TopLeft="213.085711837666,228.028568650569">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="119.780950532499,45.3047606097798"
+              Start="0,0"
+              End="119.780950532499,37.8047606097798">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.8513581175037" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.8513581175037"
+                    Point2="0,26.8513581175037"
+                    Point3="4,26.8513581175037" />
+                  <mssgle:LineSegment
+                    End="115.780950532499,26.8513581175037" />
+                  <mssgle:CubicBezierSegment
+                    Point1="115.780950532499,26.8513581175037"
+                    Point2="119.780950532499,26.8513581175037"
+                    Point3="119.780950532499,30.8513581175037" />
+                  <mssgle:LineSegment
+                    End="119.780950532499,37.8047606097798" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Dimension Cliente.Paths[Salida de ordenación1]"
+          TopLeft="525.342850107381,230.171425761495">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-151.942854403882,43.1619034988538"
+              Start="0,0"
+              End="-151.942854403882,35.6619034988538">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5813232932231" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.5813232932231"
+                    Point2="0,25.5813232932231"
+                    Point3="-4,25.5813232932231" />
+                  <mssgle:LineSegment
+                    End="-147.942854403882,25.5813232932231" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-147.942854403882,25.5813232932231"
+                    Point2="-151.942854403882,25.5813232932231"
+                    Point3="-151.942854403882,29.5813232932231" />
+                  <mssgle:LineSegment
+                    End="-151.942854403882,35.6619034988538" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Dimension Cliente\Conditional Split"
+          TopLeft="274.333329245448,358.999994650483" />
+        <EdgeLayout
+          Id="Package\Dimension Cliente.Paths[Salida de combinación de mezcla]"
+          TopLeft="352.13332914114,314.933329260349">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.0666653901341"
+              Start="0,0"
+              End="0,36.5666653901341">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.5666653901341" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\Dimension Cliente\Destino de OLE DB"
+          TopLeft="271.333329290152,440.266660964489" />
+        <EdgeLayout
+          Id="Package\Dimension Cliente.Paths[Condicion_id]"
+          TopLeft="353.4333292678,400.599994650483">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.6666663140058"
+              Start="0,0"
+              End="0,32.1666663140058">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.1666663140058" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-28.5205078125,10.5520831570029,57.041015625,11.0625"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimension Almacen\Origen Almacen">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimension Almacen\Origen DW Almacen">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimension Almacen\Destino Almacen">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimension Cliente\Origen Cliente">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimension Cliente\Origen DW Cliente">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimension Cliente\Destino de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="MATIX.DW_BikeZ"
+  DTS:DTSID="{2918866D-7F3D-42B8-84D3-A97DC60E2512}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=MATIX;Initial Catalog=DW_BikeZ;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-ETL-{2918866D-7F3D-42B8-84D3-A97DC60E2512}MATIX.DW_BikeZ;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
