@@ -11,20 +11,20 @@
   DTS:LocaleID="13322"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{845AE48E-D423-4EA8-B420-FE05F8A939BC}">
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{80DB8046-7C47-4762-BE27-99E066E6ECF6}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\cambio nombre 2"
+      DTS:refId="Package\aaaasdASD"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
       DTS:DTSID="{5F4302E4-2701-4D67-8ECC-D4DFA85B18C5}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="cambio nombre 2"
+      DTS:ObjectName="aaaasdASD"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -61,8 +61,8 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="164,42"
-          Id="Package\cambio nombre 2"
+          Size="138,42"
+          Id="Package\aaaasdASD"
           TopLeft="187,121" />
         <NodeLayout
           Size="134,42"
